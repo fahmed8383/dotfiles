@@ -3,8 +3,8 @@
 #
 
 # personal bindings
-ctrl + alt + {b, f}
-	{firefox, thunar}
+ctrl + alt + {b, f, e}
+	{firefox, thunar, code}
 
 # terminal emulator
 super + Return
