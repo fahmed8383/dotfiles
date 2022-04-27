@@ -3,6 +3,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 /home/box/.config/conky/conky.sh &
+/home/box/.config/polybar/polybar.sh &
 nitrogen --restore &
 picom &
 
