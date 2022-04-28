@@ -3,8 +3,8 @@
 #include <string.h>
 #include <xdo.h>
 
-#define HIDE_MARGIN 60
-#define DEAD_ZONE 300
+#define HIDE_MARGIN 5
+#define DEAD_ZONE 200
 #define MONITORS_NUM 2
 #define SLEEP_DELAY 500000
 #define TOP_PADDING "55"
