@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
-# Terminate already running bar instances
+# Terminate already running bar instances and script
 killall -q polybar
+killall -q /home/box/.config/polybar/polybar-autohide
 
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done

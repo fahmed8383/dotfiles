@@ -4,8 +4,10 @@
 #include <xdo.h>
 
 #define HIDE_MARGIN 60
+#define DEAD_ZONE 150
 #define MONITORS_NUM 2
 #define SLEEP_DELAY 500000
+#define TOP_PADDING "55"
 
 struct monitor {
     char *name;
@@ -84,6 +86,12 @@ void hide_bars(xdo_t *xdo, int monitor_index, Window **taskbars){
         xdo_unmap_window(xdo, *curr_bar);
         curr_bar++;
     }
+
+    // Remove the padding from the monitors
+    char cmd[1000] = "bspc config -m ";
+    strcat(cmd, monitors[monitor_index].name);
+    strcat(cmd, " top_padding 0");
+    system(cmd);
 }
 
 // Loop through all bars in a corresponding monitor and display them
@@ -93,6 +101,13 @@ void show_bars(xdo_t *xdo, int monitor_index, Window **taskbars){
         xdo_map_window(xdo, *curr_bar);
         curr_bar++;
     }
+
+    // Add padding to the monitors
+    char cmd[1000] = "bspc config -m ";
+    strcat(cmd, monitors[monitor_index].name);
+    strcat(cmd, " top_padding ");
+    strcat(cmd, TOP_PADDING);
+    system(cmd);
 }
 
 int main() {
@@ -140,9 +155,9 @@ int main() {
             exit(EXIT_FAILURE);
         }
 
-        // If our y value is greater than margin and bar is not hidden yet,
+        // If our y value is greater than margin (and deadzone) and bar is not hidden yet,
         // hide the bar
-        if(!hidden && y > HIDE_MARGIN){
+        if(!hidden && y > HIDE_MARGIN + DEAD_ZONE){
             hide_bars(xdo, curr_monitor, taskbars);
             hidden = 1;
         } 
