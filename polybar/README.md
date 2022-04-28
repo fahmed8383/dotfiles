@@ -5,7 +5,7 @@
 Please configure the following parameters in the script to fit your set up:
 1. HIDE_MARGIN: Y axis margin after which you wish to hide the bar with the top of the monitor being 0.
 2. MONITORS_NUM: The number of monitors you have set up.
-3. SLEEP_DELAY: How often you would like the script to check for mouse position and update the bar visibility (with 1 being one second).
+3. SLEEP_DELAY: How often you would like the script to check for mouse position and update the bar visibility (with 1000000 being one second).
 
 ## Monitors:
 
@@ -25,4 +25,5 @@ The xdotool libarary and xdo header file is required to compile this scrip to a 
 gcc autohide.c -lxdo -o polybar-autohide
 ````
 
-This binary can then be added to your bspwmrc autostart.
+Finally add the path to the binary at the end of your polybar.sh script.
+**Make sure to update the number in the while loop when waiting for the bars to launch to be equal to the number of bars you have**

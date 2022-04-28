@@ -12,3 +12,9 @@ polybar secondary-bspwm&
 polybar main-apps&
 polybar main-info&
 polybar main-power&
+
+# Wait till all 5 bars have been started before start autohide script
+while [ $(pgrep -c -x polybar) -ne 5 ]; do sleep 1; done
+sleep 1
+
+/home/box/.config/polybar/polybar-autohide &

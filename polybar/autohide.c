@@ -3,9 +3,9 @@
 #include <string.h>
 #include <xdo.h>
 
-#define HIDE_MARGIN 300
+#define HIDE_MARGIN 60
 #define MONITORS_NUM 2
-#define SLEEP_DELAY 0.5
+#define SLEEP_DELAY 500000
 
 struct monitor {
     char *name;
@@ -155,7 +155,7 @@ int main() {
         }
 
         // Sleep for one second before continuing loop
-        sleep(SLEEP_DELAY);
+        usleep(SLEEP_DELAY);
     }
 
     // Free dynamically allocated memory
