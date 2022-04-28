@@ -1,0 +1,6 @@
+*
+!.gitignore
+!autohide.c
+!config.ini
+!polybar.sh
+!README.md
