@@ -122,7 +122,12 @@ int main() {
     // Get all taskbar for each monitor index
     Window **taskbars = find_bars(xdo);
 
+    // Variable to keep track of if bar is hidden or not
     int hidden = 0;
+
+    // Variables to keep of which monitor the desktop is in focus
+    // for.
+    int desktop_monitor = -1;
 
     // Infinite loop to continousely keep track of mouse position
     while(1){
@@ -137,6 +142,7 @@ int main() {
             perror("Unable to get mouse position");
             exit(EXIT_FAILURE);
         }
+
 
         // Get the current monitor from x value
         int curr_monitor = -1;
@@ -155,16 +161,31 @@ int main() {
             exit(EXIT_FAILURE);
         }
 
-        // If our y value is greater than margin (and deadzone) and bar is not hidden yet,
-        // hide the bar
-        if(!hidden && y > HIDE_MARGIN + DEAD_ZONE){
+
+        // Check if the current window in focus is the desktop.
+        // Desktop has no name.
+        int is_desktop = 0;
+        Window window;
+        xdo_get_focused_window(xdo, &window);
+        unsigned char *name;
+        int name_len;
+        int name_type;
+        xdo_get_window_name(xdo, window, &name, &name_len, &name_type);
+        if (name_len == 0){
+            is_desktop = 1;
+            desktop_monitor = curr_monitor;
+        }
+
+        // If our y value is greater than margin (and deadzone), bar is not hidden yet,
+        // and current monitor's desktop is not in focus, then hide the bar.
+        if(!hidden && y > HIDE_MARGIN + DEAD_ZONE && (!is_desktop || curr_monitor != desktop_monitor)){
             hide_bars(xdo, curr_monitor, taskbars);
             hidden = 1;
         } 
 
-        // If our y value is less than margin and bar is still hidden,
-        // show the bar
-        else if(hidden && y <= HIDE_MARGIN){
+        // If our y value is less than margin, and bar is still hidden or current monitor's 
+        // desktop is in focus, then show the bar
+        else if(hidden && (y <= HIDE_MARGIN || (curr_monitor == desktop_monitor && is_desktop))){
             show_bars(xdo, curr_monitor, taskbars);
             hidden = 0;
         }
