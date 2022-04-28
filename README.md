@@ -1,4 +1,4 @@
-# Cofig Files
+# Config Files
 
 **Includes custom autohiding script with padding resizing and multi-monitor support**
 
@@ -6,7 +6,7 @@
 
 ## Setup Details:
 
-**WM:** BSPMW
+**WM:** BSPWM
 
 **Terminal:** Alacritty
 
