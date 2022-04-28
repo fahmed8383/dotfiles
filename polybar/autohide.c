@@ -160,9 +160,9 @@ int main() {
 
     // Free dynamically allocated memory
     for(int i = 0; i < MONITORS_NUM; i++){
-        free(windows_array[i]);
+        free(taskbars[i]);
     }
-    free(window);
+    free(taskbars);
 
     return 0;
 }
