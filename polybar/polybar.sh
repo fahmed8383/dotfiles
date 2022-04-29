@@ -6,6 +6,7 @@ killall -q /home/box/.config/polybar/polybar-autohide
 
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+while pgrep -u $UID -x /home/box/.config/polybar/polybar-autohide >/dev/null; do sleep 1; done
 
 # Launch polybar
 polybar main-bspwm&

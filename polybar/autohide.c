@@ -199,6 +199,7 @@ int main() {
         free(taskbars[i]);
     }
     free(taskbars);
+    free(xdo);
 
     return 0;
 }
